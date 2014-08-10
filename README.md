@@ -17,4 +17,3 @@ doubanspiders
 
 ###在线演示
 1. [看豆瓣](http://kandou.phpor.me)
-2. [网站代码](https://github.com/laomayi/kandouban)
