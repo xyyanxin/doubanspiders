@@ -11,9 +11,13 @@ doubanspiders
 2. pip install pybloom
 3. pip install pymongo
 
-###运行
-1. 进入douban目录
-2. 执行scrapy crawl movie (暂时只写了豆瓣电影爬虫)
+###运行豆瓣电影爬虫
+1. 进入douban/movie目录
+2. 执行scrapy crawl movie
+
+###运行豆瓣相册爬虫
+1. 进入douban/album目录
+2. 执行scrapy crawl album
 
 ###在线演示
 1. [电影爬虫网站示例](http://kandou.phpor.me)
