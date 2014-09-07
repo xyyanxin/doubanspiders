@@ -18,6 +18,3 @@ doubanspiders
 ###运行豆瓣相册爬虫
 1. 进入douban/album目录
 2. 执行scrapy crawl album
-
-###在线演示
-1. [电影爬虫网站示例](http://kandou.phpor.me)
