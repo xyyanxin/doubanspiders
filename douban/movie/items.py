@@ -24,6 +24,7 @@ class MovieItem(Item):
     image = Field() #图片数
     countries = Field() #制片国家
     summary = Field()
+    poster_list = Field() #海报列表
 
 
 #豆瓣相册 文档格式
