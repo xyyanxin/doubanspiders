@@ -161,7 +161,7 @@ class MovieSpider(CrawlSpider):
         
         yield scrapy.Request(url=poster_html_url,meta={'item':item},callback=self.parse_poster)
         
-    def perse_poster(self,reponse):
+    def parse_poster(self,reponse):
         item = response.meta['item']
         for x in [1,2,3,4,5,6]:
             item['poster_url_%d'%x] = reponse.xpath("/html[@class='ua-windows ua-webkit']/body/div[@id='wrapper']/div[@id='content']/div[@class='grid-16-8 clearfix']/div[@class='article']/div[@class='mod'][1]/div[@class='bd']/ul[@class='pic-col5']/li[%d]/a/img/@src"%x)
