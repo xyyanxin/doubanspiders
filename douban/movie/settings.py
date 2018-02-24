@@ -32,3 +32,11 @@ LOG_LEVEL = "DEBUG"
 #RETRY_ENABLED = False
 #DOWNLOAD_TIMEOUT = 15
 DOWNLOAD_DELAY = 0.1
+
+IPPOOL=[  
+    {"ipaddr":"124.79.45.197:8118"},  
+    {"ipaddr":"110.73.35.43:8123"},  
+    {"ipaddr":"180.118.86.26:9000"},  
+    {"ipaddr":"180.118.86.26:9000"},  
+
+]  
