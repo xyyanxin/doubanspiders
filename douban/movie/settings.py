@@ -31,4 +31,4 @@ LOG_LEVEL = "DEBUG"
 #LOG_FILE = "/var/log/scrapy_douban_movie.log"
 #RETRY_ENABLED = False
 #DOWNLOAD_TIMEOUT = 15
-#DOWNLOAD_DELAY = 0.1
+DOWNLOAD_DELAY = 0.1
