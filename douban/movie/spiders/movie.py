@@ -157,7 +157,7 @@ class MovieSpider(CrawlSpider):
     
     def item_update_poster_list(self,item):
         poster_html_url = ''.join(
-            ['https://movie.douban.com/subject/',str(item['subject_id']),'all_photos'])
+            ['https://movie.douban.com/subject/',str(item['subject_id']),'/all_photos'])
         
         yield scrapy.Request(url=poster_html_url,meta={'item':item},callback=self.parse_poster)
         
