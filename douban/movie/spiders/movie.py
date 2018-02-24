@@ -155,7 +155,7 @@ class MovieSpider(CrawlSpider):
             return True
         return False
     
-    def item_update_poster_list(item):
+    def item_update_poster_list(self,item):
         poster_html_url = ''.join(
             ['https://movie.douban.com/subject/',str(item['subject_id']),'all_photos'])
         
