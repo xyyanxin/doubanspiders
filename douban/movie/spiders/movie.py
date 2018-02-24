@@ -45,6 +45,7 @@ class MovieSpider(CrawlSpider):
         self.get_review(response, item)
         self.get_discussion(response, item)
         self.get_image(response, item)
+        item = self.item_update_poster_list(item)
 
         return item
 
@@ -153,6 +154,18 @@ class MovieSpider(CrawlSpider):
             item["runtime"] = int(M.group(1))
             return True
         return False
+    
+    def item_update_poster_list(item)
+        poster_html_url = ''.join(
+            ['https://movie.douban.com/subject/',str(item['subject_id']),'all_photos'])
+        
+        yield scrapy.Request(url=poster_html_url,meta={'item':item},callback=self.parse_poster)
+        
+    def perse_poster(self,reponse):
+        item = response.meta['item']
+        for x in [1,2,3,4,5,6]:
+            item['poster_url_%d'%x] = reponse.xpath("/html[@class='ua-windows ua-webkit']/body/div[@id='wrapper']/div[@id='content']/div[@class='grid-16-8 clearfix']/div[@class='article']/div[@class='mod'][1]/div[@class='bd']/ul[@class='pic-col5']/li[%d]/a/img/@src"%x)
+        yield item
 
 
 class MovieReviewSpider(CrawlSpider):
