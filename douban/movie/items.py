@@ -23,8 +23,9 @@ class MovieItem(Item):
     discussion = Field() #讨论
     image = Field() #图片数
     countries = Field() #制片国家
-    summary = Field()
-    image_detail = Field()
+    summary = Field()   #概况
+    image_detail = Field()  # 海报的url地址
+    comment_title = Field() # 当前页评论的标题
 
 
 #豆瓣相册 文档格式

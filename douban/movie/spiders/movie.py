@@ -48,6 +48,7 @@ class MovieSpider(CrawlSpider):
         self.get_review(response, item)
         self.get_discussion(response, item)
         self.get_image(response, item)
+        self.get_comment_title(response, item)
 
         item = self.get_image_detail(item)
 
@@ -160,7 +161,6 @@ class MovieSpider(CrawlSpider):
         return False
 
     def get_image_detail(self, item):
-        item['image_detail'] = 'test'
         image_detail_url = 'https://movie.douban.com/subject/' + str(item['subject_id']) + '/all_photos'
         return scrapy.Request(url=image_detail_url,meta={'item':item},callback=self.parse_image_detail,dont_filter=True)
 
@@ -168,9 +168,14 @@ class MovieSpider(CrawlSpider):
         item = response.meta['item']
         image_src = response.xpath('//*[@id="content"]/div/div[1]/div[1]')
         image_src = image_src.css('img').xpath('@src').extract()
-        item['image_detail'] = image_src
+        if image_src: item['image_detail'] = image_src
         return item
 
+    def get_comment_title(self, response, item):
+        comment_title = response.xpath('//*[@id="content"]/div[2]/div[1]/section[2]')
+        comment_title = comment_title.xpath('//h2/a/text()').extract()
+        item['comment_title'] = 'test'
+        if comment_title: item['comment_title'] = comment_title
 
 
 class MovieReviewSpider(CrawlSpider):
