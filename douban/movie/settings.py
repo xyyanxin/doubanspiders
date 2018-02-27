@@ -6,13 +6,15 @@ SPIDER_MODULES = ["spiders"]
 NEWSPIDER_MODULE = "spiders"
 
 ITEM_PIPELINES = {
-    "pipelines.MoviePipeline" : 1,
+    "pipelines.JsonWriterPipeline" : 1,
+    "pipelines.MoviePipeline": 3,
 }
 
 DOWNLOADER_MIDDLEWARES = {
     "misc.middlewares.CustomUserAgentMiddleware": 401,
     "misc.middlewares.CustomCookieMiddleware": 701,
     "misc.middlewares.CustomHeadersMiddleware": 551,
+    #"misc.middlewares.proxyMiddleware": 201,
 }
 
 
@@ -26,17 +28,10 @@ DUPEFILTER_CLASS = "misc.bloomfilter.BLOOMDupeFilter"
 
 WEBSERVICE_ENABLED = False
 TELNETCONSOLE_ENABLED = False
-LOG_LEVEL = "DEBUG"
-#LOG_STDOUT = False
+LOG_LEVEL = "INFO"
+LOG_STDOUT = False
 #LOG_FILE = "/var/log/scrapy_douban_movie.log"
 #RETRY_ENABLED = False
 #DOWNLOAD_TIMEOUT = 15
-DOWNLOAD_DELAY = 0.1
-
-IPPOOL=[  
-    {"ipaddr":"124.79.45.197:8118"},  
-    {"ipaddr":"110.73.35.43:8123"},  
-    {"ipaddr":"180.118.86.26:9000"},  
-    {"ipaddr":"180.118.86.26:9000"},  
-
-]  
+DOWNLOAD_DELAY = 7
+COOKIES_ENABLES=False

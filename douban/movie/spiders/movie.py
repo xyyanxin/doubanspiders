@@ -14,13 +14,16 @@ NUM_RE = re.compile(r"(\d+)")
 
 class MovieSpider(CrawlSpider):
     name = "movie"
+
     allowed_domains = ["movie.douban.com"]
-    start_urls = ["http://movie.douban.com"]
+    start_urls = ["https://movie.douban.com/subject/26861685/"]
 
     rules = (
-        Rule(LinkExtractor(allow=r"/subject/\d+/($|\?\w+)"), 
+        Rule(LinkExtractor(allow=r"/subject/\d+/($|\?\w+)"),
             callback="parse_movie", follow=True),
     )
+
+
     def parse_movie(self, response):
         item = MovieItem()
 
@@ -45,7 +48,8 @@ class MovieSpider(CrawlSpider):
         self.get_review(response, item)
         self.get_discussion(response, item)
         self.get_image(response, item)
-        item = self.item_update_poster_list(item)
+
+        item = self.get_image_detail(item)
 
         return item
 
@@ -154,18 +158,19 @@ class MovieSpider(CrawlSpider):
             item["runtime"] = int(M.group(1))
             return True
         return False
-    
-    def item_update_poster_list(self,item):
-        poster_html_url = ''.join(
-            ['https://movie.douban.com/subject/',str(item['subject_id']),'/all_photos'])
-        
-        yield scrapy.Request(url=poster_html_url,meta={'item':item},callback=self.parse_poster)
-        
-    def parse_poster(self,reponse):
+
+    def get_image_detail(self, item):
+        item['image_detail'] = 'test'
+        image_detail_url = 'https://movie.douban.com/subject/' + str(item['subject_id']) + '/all_photos'
+        return scrapy.Request(url=image_detail_url,meta={'item':item},callback=self.parse_image_detail,dont_filter=True)
+
+    def parse_image_detail(self,response):
         item = response.meta['item']
-        for x in [1,2,3,4,5,6]:
-            item['poster_url_%d'%x] = reponse.xpath("/html[@class='ua-windows ua-webkit']/body/div[@id='wrapper']/div[@id='content']/div[@class='grid-16-8 clearfix']/div[@class='article']/div[@class='mod'][1]/div[@class='bd']/ul[@class='pic-col5']/li[%d]/a/img/@src"%x)
-        yield item
+        image_src = response.xpath('//*[@id="content"]/div/div[1]/div[1]')
+        image_src = image_src.css('img').xpath('@src').extract()
+        item['image_detail'] = image_src
+        return item
+
 
 
 class MovieReviewSpider(CrawlSpider):
