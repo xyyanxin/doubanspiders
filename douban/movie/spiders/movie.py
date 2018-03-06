@@ -16,7 +16,7 @@ class MovieSpider(CrawlSpider):
     name = "movie"
 
     allowed_domains = ["movie.douban.com"]
-    start_urls = ["https://movie.douban.com/subject/26861685/"]
+    start_urls = ["https://movie.douban.com"]
 
     rules = (
         Rule(LinkExtractor(allow=r"/subject/\d+/($|\?\w+)"),

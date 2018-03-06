@@ -34,5 +34,5 @@ LOG_STDOUT = False
 #LOG_FILE = "/var/log/scrapy_douban_movie.log"
 #RETRY_ENABLED = False
 #DOWNLOAD_TIMEOUT = 15
-DOWNLOAD_DELAY = 2
+DOWNLOAD_DELAY = 1.5
 COOKIES_ENABLES=False
